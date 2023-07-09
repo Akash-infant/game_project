@@ -1,11 +1,11 @@
 import random
-def start_game():
+def start_game():                     # TO START THE GAME
     mat = []
     for i in range(4):
         mat.append([0]*4)
     return mat
 
-def add_new_2(mat):
+def add_new_2(mat):                      # ADD TWO IN NEW GRID
     
     r = random.randint(0,3)
     c = random.randint(0,3)
@@ -14,7 +14,7 @@ def add_new_2(mat):
         c = random.randint(0,3)
     mat[r][c] = 2
 
-def reverse(mat):
+def reverse(mat):                        # REVERSE THE GRID
     new_mat = []
     for i in range(4):
         new_mat.append([])
@@ -23,7 +23,7 @@ def reverse(mat):
     
     return new_mat
 
-def transpose(mat):
+def transpose(mat):            # TRANSPOSE THE GRID
     
     new_mat = []
     for i in range(4):
@@ -32,7 +32,7 @@ def transpose(mat):
             new_mat[i].append(mat[j][i])
     return new_mat
 
-def merge(mat):
+def merge(mat):    # MERGE TWO NUMBERS IF SAME
     changed = False
     for i in range(4):
         for j in range(3):
@@ -42,7 +42,7 @@ def merge(mat):
                 changed = True
     return mat,changed
             
-def compress(mat):
+def compress(mat):  # COMPRESSING THE ROWS IF EMPTY
     
     changed = False
     new_mat = []
@@ -59,7 +59,7 @@ def compress(mat):
                 pos+=1
     return new_mat,changed
 
-def move_up(grid):
+def move_up(grid):                       # MOVING UP IN GRID
     transposed_grid = transpose(grid)
     new_grid,changed1 = compress(transposed_grid)
     new_grid,changed2 = merge(new_grid)
@@ -68,7 +68,7 @@ def move_up(grid):
     final_grid = transpose(new_grid)
     return final_grid,changed
 
-def move_down(grid):
+def move_down(grid):                    # MOVING DOWN IN GRID
     transposed_grid = transpose(grid)
     reversed_grid = reverse(transposed_grid)
     new_grid,changed1 = compress(reversed_grid)
@@ -79,7 +79,7 @@ def move_down(grid):
     final_grid = transpose(final_reversed_grid)
     return final_grid,changed
 
-def move_right(grid):
+def move_right(grid):                        # MOVING RIGHT IN GRID
     
     reversed_grid = reverse(grid)
     new_grid,changed1 = compress(reversed_grid)
@@ -89,7 +89,7 @@ def move_right(grid):
     final_grid = reverse(new_grid)
     return final_grid,changed
 
-def move_left(grid):
+def move_left(grid):                            # MOVING LEFT IN GRID
     new_grid,changed1 = compress(grid)
     new_grid,changed2 = merge(new_grid)
     changed = changed1 or changed2
@@ -97,7 +97,7 @@ def move_left(grid):
     return new_grid,changed
 
     
-def get_current_state(mat):
+def get_current_state(mat):           # TO CHECK THE CURRENT STATUS
     # Anywhere 2048 is present
     for i in range(4):
         for j in range(4):
